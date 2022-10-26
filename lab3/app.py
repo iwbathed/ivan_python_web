@@ -29,6 +29,21 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 
+contact_l = {
+    "mails" : [
+        "my_super_mail@email.com",
+        "my_second_mail@email.com",
+        "main_mail@email.com",
+    ],
+    "phones" : [
+        "0989999999",
+        "0688888888",
+        "55-68-35"
+    ],
+
+}
+
+
 
 
 navs = [
@@ -53,7 +68,12 @@ navs = [
 
 
 
+def footer_l_get():
 
+    return [platform.platform(),
+              request.headers.get('User-Agent'),
+              datetime.now()
+              ]
 @app.route('/')
 def start():
     return redirect("/home")
@@ -62,35 +82,37 @@ def start():
 @app.route('/home')
 def home():
 
-    footer_l=[platform.platform(),
-              request.headers.get('User-Agent'),
-              datetime.now()
-              ]
-    return render_template('index.html', navs=navs, footer_l=footer_l)
+    # footer_l=[platform.platform(),
+    #           request.headers.get('User-Agent'),
+    #           datetime.now()
+    #           ]
+    return render_template('index.html', navs=navs, footer_l=footer_l_get())
 
 @app.route('/about')
 def about():
-    footer_l = [platform.platform(),
-                request.headers.get('User-Agent'),
-                datetime.now()
-                ]
-    return render_template('about.html', navs=navs, footer_l=footer_l)
+    # footer_l = [platform.platform(),
+    #             request.headers.get('User-Agent'),
+    #             datetime.now()
+    #             ]
+    return render_template('about.html', navs=navs, footer_l=footer_l_get())
 
 @app.route('/contact')
 def contact():
-    footer_l = [platform.platform(),
-                request.headers.get('User-Agent'),
-                datetime.now()
-                ]
-    return render_template('contact.html', navs=navs, footer_l=footer_l)
+    # footer_l = [platform.platform(),
+    #             request.headers.get('User-Agent'),
+    #             datetime.now()
+    #             ]
+    return render_template('contact.html', navs=navs,
+                           contact_l=contact_l,
+                           footer_l=footer_l_get())
 
 @app.route('/projects')
 def projects():
-    footer_l = [platform.platform(),
-                request.headers.get('User-Agent'),
-                datetime.now()
-                ]
-    return render_template('projects.html', navs=navs, footer_l=footer_l)
+    # footer_l = [platform.platform(),
+    #             request.headers.get('User-Agent'),
+    #             datetime.now()
+    #             ]
+    return render_template('projects.html', navs=navs, footer_l=footer_l_get())
 
 
 
