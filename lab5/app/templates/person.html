@@ -1,12 +1,44 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}Contact info list{% endblock %}
-{% block content %}
-    <ul class="list-group">
-    <li class="list-group-item">Username, Email</li>
 
-        {% for i in contact_info_list %}
-            <li class="list-group-item">{{ i.name }}, {{ i.email }}</li>
-        {% endfor %}
-    </ul>
+
+
+
+{% block content %}
+
+    <div>
+
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                  Username
+                </div>
+                <div class="col">
+                  Email
+                </div>
+                <div class="col">
+                  Phone
+                </div>
+                <div class="col">
+                  Subject
+                </div>
+                <div class="col">
+                  Message
+                </div>
+            </div>
+            {% for i in contact_info_list %}
+            <div class="row">
+                <div class="col">{{ i.name }}</div>
+                <div class="col">{{ i.email }}</div>
+                <div class="col">{{ i.phone }}</div>
+                <div class="col">{{ i.subject }}</div>
+                <div class="col">{{ i.message }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+
 {% endblock %}
