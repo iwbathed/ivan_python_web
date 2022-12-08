@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Create category{% endblock %}
+{% block content %}
+    {% include 'tasks_nav.html' %}
+    <div class="container-sm" align="center">
+        <div class="container" align="left">
+            {% from "_render_field.html" import render_field %}
+            <form method="post">
+              {{ form.csrf_token }}
+              {{ render_field(form.name, class="form-control") }}
+              {{ form.submit(class="btn btn-secondary") }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
