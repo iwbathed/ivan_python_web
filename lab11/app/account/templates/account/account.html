@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<!--    <div class="container">-->
+<!--        <h5><p>{{ current_user.username }}</p></h5>-->
+<!--         <h5><p>{{ current_user.email }}</p></h5>-->
+<!--    </div>-->
+<div class="content-section">
+    <div class="container-sm" align="center">
+        <div class="container" align="left">
+            <div class="media">
+                <img src="{{ image_file }}" alt="" class="img-fluid rounded-circle account-img" style="width:150px; height: 150px;">
+                <div class="media-body">
+                    <h2 class="account-heading">{{ current_user.username }}</h2>
+                    <p>{{ current_user.email }}</p>
+                    <p>{{ current_user.about_me }}</p>
+                    <p>{{ current_user.last_seen }}</p>
+                </div>
+            </div>
+            {% from "_render_field.html" import render_field %}
+                <form method="post" action="{{ url_for('account.account') }}" enctype="multipart/form-data">
+                  {{ form.csrf_token }}
+                  {{ render_field(form.image, class="form-control-file") }}
+                  {{ render_field(form.username, class="form-control", value=current_user.username) }}
+                  {{ render_field(form.email, class="form-control", value=current_user.email) }}
+                  {{ render_field(form.about_me, class="form-control", value=current_user.about_me) }}
+                  {{ form.submit(class="btn btn-primary") }}
+                </form>
+                <h4>Change password</h4>
+                <form method="post" action="{{ url_for('account.change_pwd') }}" enctype="multipart/form-data">
+                    {{form.csrf_token}}
+                    {{render_field(pass_form.old_password, class="form-control")}}
+                    {{render_field(pass_form.new_password, class="form-control")}}
+                    {{ render_field(pass_form.confirm_password, class="form-control") }}
+                    {{ pass_form.submit(class="btn btn-primary") }}
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

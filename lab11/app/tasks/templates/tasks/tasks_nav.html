@@ -1,0 +1,28 @@
+
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Navbar
+  </button>
+  <ul class="dropdown-menu">
+      <li>
+          <a class="dropdown-item" href="{{ url_for('task.user_profile') }}">User profile</a>
+      </li>
+      <li>
+          <a class="dropdown-item" href="{{ url_for('task.create_task') }}">Create task</a>
+      </li>
+      <li>
+          <a class="dropdown-item" href="{{ url_for('task.create_category') }}">Create category</a>
+      </li>
+      <li>
+          <a class="dropdown-item" href="{{ url_for('task.list_task') }}">Task list</a>
+      </li>
+      <li>
+          <a class="dropdown-item" href="{{ url_for('task.list_category') }}">Category list</a>
+      </li>
+  </ul>
+</div>
+
+
+
+
