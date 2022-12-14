@@ -131,8 +131,36 @@ def test_task_delete(client, create_task):
     assert 'Successfully deleted!' in resp.get_data(as_text=True)
 
 
+def test_category_create(client, create_cat):
+    resp = client.post('/task/category/create',
+                            data={'name': 'main'},
+                            follow_redirects=True)
+
+    assert "Category successfully added" in resp.get_data(as_text=True)
 
 
+def test_list_category(client, create_cat):
+    resp = client.get('/task/category/', follow_redirects=True)
 
+    assert 'homework' in resp.get_data(as_text=True)
+    assert 'Category detail' not in resp.get_data(as_text=True)
+
+
+def test_detail_category(client, create_cat):
+    resp = client.get('task/category/1', follow_redirects=True)
+    assert 'Category detail' in resp.get_data(as_text=True)
+
+
+def test_category_update(client, create_cat):
+    data = {
+        'name': 'main_category',
+    }
+    resp = client.post('/task/category/1/update', data=data, follow_redirects=True)
+    assert 'main_category' in resp.get_data(as_text=True)
+
+
+def test_category_delete(client, create_cat):
+    resp = client.post('/task/category/1/delete', follow_redirects=True)
+    assert 'Successfully deleted!' in resp.get_data(as_text=True)
 
 
