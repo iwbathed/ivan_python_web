@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}List task{% endblock %}
+{% block content %}
+    {% include 'tasks_nav.html' %}
+    <div class="container-sm" align="center">
+    <div class="row">
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Deadline</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Progress</th>
+          <th scope="col">Category</th>
+          <th scope="col">Owner</th>
+          <th scope="col">Assigned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in task_list %}
+            <tr>
+              <td><a style="text-decoration: none" href="{{ url_for('task.detail_task', task_id=task.id) }}">{{ task.title }}</a></td>
+              <td>{{ task.deadline }}</td>
+              <td>{{ task.priority.name }}</td>
+              <td>{{ task.progress.name }}</td>
+              <td>{{ task.category.name }}</td>
+              <td><a style="text-decoration: none" href="{{ url_for('task.user_profile', user_id=task.owner_id) }}">{{ task.owner_id }}</a></td>
+              <td>
+                  {% for user in task.users %}
+                      <p><a style="text-decoration: none" href="{{ url_for('task.user_profile', user_id=user.id) }}">{{ user.username }}</a></p>
+                  {% endfor %}
+              </td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+{% endblock %}
