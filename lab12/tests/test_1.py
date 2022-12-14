@@ -22,28 +22,31 @@ def client(app):
 
 
 @pytest.fixture
-def logined_user(client):
+def logged_in_user(client):
     with client:
-        client.post('/register', data={'username': 'test', 'email': 'test@test.com', 'password': '11111111Ab',
-                                            "confirm_password": '11111111Ab'},
+        client.post('/register',
+                    data={'username': 'test', 'email': 'testmail@email.com', 'password': 'qwe123',
+                                            "confirm_password": 'qwe123'},
                     follow_redirects=True)
-        client.post('/login', data={'email': 'test@test.com', 'password': '11111111Ab', 'remember': 'y'},
+        client.post('/login',
+                    data={'email': 'testmail@email.com', 'password': 'qwe123', 'remember': 'y'},
                     follow_redirects=True)
 
 
 @pytest.fixture
-def create_cat(client, logined_user):
+def create_cat(client, logged_in_user):
     with client:
-        client.post('/task/category/create', data={'name': 'homework'},
+        client.post('/task/category/create',
+                    data={'name': 'homework'},
                     follow_redirects=True)
 
 
 @pytest.fixture
-def create_task(client, logined_user, create_cat):
+def create_task(client, logged_in_user, create_cat):
     data = {
         'title': 'Test task',
         'description': 'task desc',
-        'deadline': '2022-12-15',
+        'deadline': '2022-12-20',
         'priority': 1,
         'progress': 1,
         'category': 1
@@ -54,7 +57,6 @@ def create_task(client, logined_user, create_cat):
 
 
 def test_setup(client):
-    # assert app is not None
     assert client is not None
 
 
@@ -67,12 +69,13 @@ def test_index(client):
 def test_user_register_login(client):
     with client:
         resp = client.post('/register',
-                           data={'username': 'test', 'email': 'test@test.com', 'password': '11111111Ab',
-                                 "confirm_password": '11111111Ab'},
+                           data={'username': 'test', 'email': 'testmail@email.com', 'password': 'qwe123',
+                                 "confirm_password": 'qwe123'},
                            follow_redirects=True)
         assert resp.status_code == 200
         assert 'login' in resp.get_data(as_text=True)
-        resp = client.post('/login', data={'email': 'test@test.com', 'password': '11111111Ab', 'remember': 'y'},
+        resp = client.post('/login',
+                           data={'email': 'testmail@email.com', 'password': 'qwe123', 'remember': 'y'},
                            follow_redirects=True)
         assert resp.status_code == 200
         assert current_user.username == "test"
@@ -87,7 +90,7 @@ def test_task_create(client, create_cat):
     data = {
         'title': 'Test task',
         'description': 'task desc',
-        'deadline': '2022-12-15',
+        'deadline': '2022-12-20',
         'priority': 1,
         'progress': 1,
         'category': 1
