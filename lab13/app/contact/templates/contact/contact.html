@@ -1,0 +1,72 @@
+
+{% extends "base.html" %}
+{% block title %}Contact{% endblock %}
+
+
+
+
+{% block content %}
+
+
+
+
+<div style="padding-top:5%;" class="container text-center">
+    <div align="center" class="container">
+        <img style="width:50%;
+          border-radius: 45%;
+            opacity:0.7"
+             src="../static/imgs/call-center.png" >
+
+    </div>
+
+    {%for i in contact_l %}
+
+    <div style="padding-top:3%;" class="row">
+
+        <div class="col">
+            {% if i == "mails" %}
+            <span>Mails :</span>
+            {% elif i == "phones" %}
+            <span>Phones :</span>
+            {% endif %}
+        </div>
+
+        <div class="col">
+            {%for q in contact_l[i] %}
+            <div class="row">{{q}}</div>
+
+             {% endfor %}
+        </div>
+    </div>
+
+
+    {% endfor %}
+
+    {% from "_render_field.html" import render_field %}
+    <div class="container" style="width: 60%;">
+        <form method="post">
+          {{ form.csrf_token }}
+          {% if session['name'] %}
+            <dt><label for="name">Name</label></dt>
+            <dd><input class="form-control" id="name" maxlength="10" minlength="4" name="name" required="" type="text" value="{{session['name']}}"> </dd>
+            <br>
+            <dt><label for="email">Email</label></dt>
+            <dd><input class="form-control" id="email" name="email" required="" type="text" value="{{session['email']}}"> </dd>
+          {% else %}
+            {{ render_field(form.name, class="form-control") }}
+            {{ render_field(form.email, class="form-control") }}
+          {% endif %}
+          {{ render_field(form.phone, class="form-control") }}
+          {{ render_field(form.subject, class="form-control") }}
+          {{ render_field(form.message, class="form-control") }}
+          {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+
+
+
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}List category{% endblock %}
+{% block content %}
+    {% include 'tasks_nav.html' %}
+    <div class="container-sm" align="center">
+    <div class="row">
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cat in cat_list %}
+            <tr>
+              <td>{{ cat.id }}</td>
+              <td><a style="text-decoration: none" href="{{ url_for('task.detail_category', cat_id=cat.id) }}">{{ cat.name }}</a></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+{% endblock %}
