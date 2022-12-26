@@ -17,6 +17,7 @@ Flask-SQLAlchemy==3.0.2
 flask-swagger-ui==4.11.1
 Flask-WTF==1.0.1
 greenlet==2.0.0
+gunicorn==20.1.0
 idna==3.4
 iniconfig==1.1.1
 itsdangerous==2.1.2
@@ -27,6 +28,7 @@ packaging==22.0
 phonenumbers==8.12.57
 Pillow==9.3.0
 pluggy==1.0.0
+psycopg2-binary==2.9.5
 PyJWT==2.6.0
 pytest==7.2.0
 pytz==2022.7
@@ -35,3 +37,4 @@ SQLAlchemy==1.4.42
 tomli==2.0.1
 Werkzeug==2.2.2
 WTForms==3.0.1
+
