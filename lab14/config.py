@@ -6,7 +6,7 @@ main_dir = os.path.abspath(os.path.dirname(__file__))
 SECRET_KEY = '123141241231231241421'
 WTF_CSRF_ENABLED = True
 
-SQLALCHEMY_DATABASE_URI = 'postgres:///' + \
+SQLALCHEMY_DATABASE_URI = 'postgresql:///' + \
                           os.path.join(main_dir, 'site.db')
 
 SQLALCHEMY_TRACK_MODIFICATIONS = True
@@ -24,19 +24,19 @@ class DevConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI') or \
-                              'postgres:///' + os.path.join(main_dir, 'site.db')
+                              'postgresql:///' + os.path.join(main_dir, 'site.db')
 
 
 class TestConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgres:///' + os.path.join(main_dir, 'test_site.db')
+    SQLALCHEMY_DATABASE_URI = 'postgresql:///' + os.path.join(main_dir, 'test_site.db')
     WTF_CSRF_ENABLED = False
 
 
 class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI') or \
-                              'postgres:///' + os.path.join(main_dir, 'site.db')
+                              'postgresql:///' + os.path.join(main_dir, 'site.db')
 
 
 config = {
