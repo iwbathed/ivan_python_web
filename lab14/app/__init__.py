@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_ckeditor import CKEditor
-# import sqlalchemy as sa
+import sqlalchemy as sa
 from config import config
 
 
@@ -47,8 +47,8 @@ def create_app(config_name = 'default'):
         app.register_blueprint(api2_bp)
         app.register_blueprint(swagger_bp)
 
-        engine = SQLAlchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-        inspector = SQLAlchemy.inspect(engine)
+        engine = sa.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+        inspector = sa.inspect(engine)
         if not inspector.has_table("users"):
             with app.app_context():
                 db.drop_all()
