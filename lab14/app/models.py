@@ -90,7 +90,7 @@ class User(db.Model, UserMixin):
         self.hashed_password = bcrypt.generate_password_hash(password)
 
     def verify_password(self, password):
-        return bcrypt.check_password_hash(self.hashed_password.decode('utf-8'), password)
+        return bcrypt.check_password_hash(self.hashed_password'''.decode('utf-8')''', password)
 
     def repr(self):
         return f"Name : {self.name}, Email: {self.email}, Phone: {self.phone}, Subject: {self.subject},  Message: {self.message}"
