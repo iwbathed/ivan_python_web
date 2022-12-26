@@ -31,8 +31,8 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         email = form.email.data
-        #password = bcrypt.generate_password_hash(form.password.data)
-        password = form.password.data
+        password = bcrypt.generate_password_hash(form.password.data)
+        #password = form.password.data
         
         user = User(username=username, email=email, hashed_password=password)
         db.session.add(user)
@@ -171,8 +171,8 @@ def save_picture(from_picture):
 def change_pwd():
     pass_form = ChangePasswordForm()
     if pass_form.validate_on_submit():
-        #password = bcrypt.generate_password_hash(pass_form.new_password.data)
-        password = pass_form.new_password.data
+        password = bcrypt.generate_password_hash(pass_form.new_password.data)
+        #password = pass_form.new_password.data
         current_user.hashed_password = password
         db.session.add(current_user)
         db.session.commit()
