@@ -1,0 +1,29 @@
+name: Test code
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          venv/bin/pip install -r lab14/requirements.txt
+      - name: Run tests
+        run: |
+          cd lab14
+          python -m pytest
+      - name: Deploy to Render
+        env:
+          DEPLOY_URL: ${{ secret.SECRET_ }}
+        run: |
+          curl  "$DEPLOY_URL"
