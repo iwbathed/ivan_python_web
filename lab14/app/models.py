@@ -93,8 +93,8 @@ class User(db.Model, UserMixin):
         
         print("MODEL password: '" + password + "'")
         print("MODEL hash: '" + self.hashed_password + "'")
-        return bcrypt.check_password_hash(self.hashed_password , password)
-
+        #return bcrypt.check_password_hash(self.hashed_password , password)
+        return bcrypt.check_password_hash(self.hashed_password.encode('utf-8'), password)
     def repr(self):
         return f"Name : {self.name}, Email: {self.email}, Phone: {self.phone}, Subject: {self.subject},  Message: {self.message}"
 
