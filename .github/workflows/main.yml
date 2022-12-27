@@ -24,6 +24,7 @@ jobs:
           python -m pytest
       - name: Deploy to Render
         env:
-          DEPLOY_URL: ${{ secret.SECRET_ }}
+          DEPLOY_URL: ${{ secrets.SECRET_ }}
         run: |
           curl  "$DEPLOY_URL"
+          
