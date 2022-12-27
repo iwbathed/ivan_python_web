@@ -35,12 +35,12 @@ class DevConfig(Config):
 class TestConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    if os.getenv('DATABASE_URL'):
-        SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
-    else:
-        SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(main_dir, 'instance', 'app.db')}"
+    # if os.getenv('DATABASE_URL'):
+    #     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+    # else:
+    #     SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(main_dir, 'instance', 'app.db')}"
 
-    # SQLALCHEMY_DATABASE_URI = 'postgresql:///' + os.path.join(main_dir, 'test_site.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(main_dir, 'test_site.db')
     WTF_CSRF_ENABLED = False
 
 
