@@ -20,7 +20,7 @@ jobs:
           pip install -r lab14/requirements.txt
       - name: Run tests
         run: |
-          
+          cd lab14
           python -m pytest
       - name: Deploy to Render
         env:
